@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://1asfi1p18que"]
+
+[ext_resource type="Texture2D" uid="uid://b2gg5xodbajes" path="res://skybox.png" id="1_4rey5"]
+[ext_resource type="PackedScene" uid="uid://bn2em5ub5fahr" path="res://floor.glb" id="1_8j6v5"]
+[ext_resource type="PackedScene" uid="uid://6dm8s5hnylg3" path="res://labyrinth2.glb" id="2_qn7oe"]
+[ext_resource type="Texture2D" uid="uid://ds3e6swhmifvb" path="res://floor_floor.png" id="3_floor_texture"]
+[ext_resource type="PackedScene" uid="uid://ci827o3cm6fe7" path="res://player.tscn" id="3_12345"]
+[ext_resource type="Script" uid="uid://dcc25helyf3kq" path="res://tmp_rovodev_setup_collision.gd" id="5_collision_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_texture = ExtResource("3_floor_texture")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skybox"]
+panorama = ExtResource("1_4rey5")
+
+[sub_resource type="Sky" id="Sky_12345"]
+sky_material = SubResource("PanoramaSkyMaterial_skybox")
+
+[sub_resource type="Environment" id="Environment_12345"]
+background_mode = 2
+sky = SubResource("Sky_12345")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(1000, 0.4, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_labyrinth"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_12345")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="floorg" parent="." instance=ExtResource("1_8j6v5")]
+transform = Transform3D(-15.3245, 0, 15.2866, 0, 21.6453, 0, -15.2866, 0, -15.3245, -2.73941, -1.58133, 0.577501)
+material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="StaticBody3D_Floor" type="StaticBody3D" parent="floorg"]
+
+[node name="StaticBody3D_Floor#CollisionShape3D_Floor" type="CollisionShape3D" parent="floorg/StaticBody3D_Floor"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.00875496, -0.00917665, -0.00761628)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="labyrinth2" parent="." instance=ExtResource("2_qn7oe")]
+transform = Transform3D(-3.88229, 0, 14.4889, 0, 68.255, 0, -14.4889, 0, -3.88229, -34.621, -5.7, -136.262)
+
+[node name="StaticBody3D_Labyrinth" type="StaticBody3D" parent="labyrinth2"]
+
+[node name="StaticBody3D_Labyrinth#CollisionShape3D_Labyrinth" type="CollisionShape3D" parent="labyrinth2/StaticBody3D_Labyrinth"]
+shape = SubResource("ConcavePolygonShape3D_labyrinth")
+
+[node name="CollisionSetup" type="Node" parent="."]
+script = ExtResource("5_collision_script")
+
+[node name="Player" parent="." instance=ExtResource("3_12345")]
+transform = Transform3D(-0.886503, 0, 0.462724, 0, 1, 0, -0.462724, 0, -0.886503, -0.0918365, 4.99788, -0.572824)
