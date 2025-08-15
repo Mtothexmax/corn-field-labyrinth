@@ -1,15 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://1asfi1p18que"]
+[gd_scene load_steps=12 format=3 uid="uid://1asfi1p18que"]
 
 [ext_resource type="Texture2D" uid="uid://b2gg5xodbajes" path="res://skybox.png" id="1_4rey5"]
 [ext_resource type="PackedScene" uid="uid://bn2em5ub5fahr" path="res://floor.glb" id="1_8j6v5"]
 [ext_resource type="PackedScene" uid="uid://6dm8s5hnylg3" path="res://labyrinth2.glb" id="2_qn7oe"]
-[ext_resource type="Texture2D" uid="uid://ds3e6swhmifvb" path="res://floor_floor.png" id="3_floor_texture"]
 [ext_resource type="PackedScene" uid="uid://ci827o3cm6fe7" path="res://player.tscn" id="3_12345"]
-[ext_resource type="Script" uid="uid://dcc25helyf3kq" path="res://tmp_rovodev_setup_collision.gd" id="5_collision_script"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_texture = ExtResource("3_floor_texture")
-uv1_scale = Vector3(100, 100, 100)
+[ext_resource type="Script" path="res://tmp_rovodev_setup_collision.gd" id="5_collision_script"]
+[ext_resource type="AudioStream" uid="uid://b6pl1rplyqs6h" path="res://chris haugen morning mandolin.mp3" id="8_audio_ambient"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skybox"]
 panorama = ExtResource("1_4rey5")
@@ -37,7 +33,6 @@ shadow_enabled = true
 
 [node name="floorg" parent="." instance=ExtResource("1_8j6v5")]
 transform = Transform3D(-15.3245, 0, 15.2866, 0, 21.6453, 0, -15.2866, 0, -15.3245, -2.73941, -1.58133, 0.577501)
-material_override/0 = SubResource("StandardMaterial3D_floor")
 
 [node name="StaticBody3D_Floor" type="StaticBody3D" parent="floorg"]
 
@@ -57,4 +52,30 @@ shape = SubResource("ConcavePolygonShape3D_labyrinth")
 script = ExtResource("5_collision_script")
 
 [node name="Player" parent="." instance=ExtResource("3_12345")]
-transform = Transform3D(-0.886503, 0, 0.462724, 0, 1, 0, -0.462724, 0, -0.886503, -0.0918365, 4.99788, -0.572824)
+
+[node name="Minimap" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+)anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = null
+
+[node name="MorningMandolinPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_audio_ambient")
+volume_db = -30.0
+autoplay = true
+
+[node name="CornFieldAmbientPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_audio_ambient")
+volume_db = -30.0
+autoplay = true
