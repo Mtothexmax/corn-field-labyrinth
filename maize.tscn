@@ -40,7 +40,11 @@ transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.00875
 shape = SubResource("BoxShape3D_floor")
 
 [node name="labyrinth2" parent="." instance=ExtResource("2_qn7oe")]
-transform = Transform3D(-227.516, 0, 849.102, 0, 1500, 0, -849.102, 0, -227.516, 155.776, -85.557, 294.798)
+transform = Transform3D(-227.516, 0, 849.102, 0, 1500, 0, -849.102, 0, -227.516, 198.201, -85.557, 272.698)
+
+[node name="StaticBody3D_Labyrinth" type="StaticBody3D" parent="labyrinth2"]
+
+[node name="StaticBody3D_Labyrinth#CollisionShape3D_Labyrinth" type="CollisionShape3D" parent="labyrinth2/StaticBody3D_Labyrinth"]
 
 [node name="CollisionSetup" type="Node" parent="."]
 script = ExtResource("5_collision_script")
