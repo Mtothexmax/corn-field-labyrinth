@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://1asfi1p18que"]
+[gd_scene load_steps=12 format=3 uid="uid://1asfi1p18que"]
 
 [ext_resource type="Texture2D" uid="uid://b2gg5xodbajes" path="res://skybox.png" id="1_4rey5"]
 [ext_resource type="PackedScene" uid="uid://bn2em5ub5fahr" path="res://floor.glb" id="1_8j6v5"]
 [ext_resource type="PackedScene" uid="uid://6dm8s5hnylg3" path="res://labyrinth2.glb" id="2_qn7oe"]
 [ext_resource type="PackedScene" uid="uid://ci827o3cm6fe7" path="res://player.tscn" id="3_12345"]
 [ext_resource type="Script" path="res://tmp_rovodev_setup_collision.gd" id="5_collision_script"]
-[ext_resource type="AudioStream" path="res://chris haugen morning mandolin.mp3" id="7_audio_mandolin"]
-[ext_resource type="AudioStream" path="res://corn field ambient.mp3" id="8_audio_ambient"]
+[ext_resource type="AudioStream" uid="uid://b6pl1rplyqs6h" path="res://chris haugen morning mandolin.mp3" id="7_audio_mandolin"]
+[ext_resource type="AudioStream" uid="uid://cbmitsf16cqgr" path="res://corn field ambient.mp3" id="8_audio_ambient"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skybox"]
 panorama = ExtResource("1_4rey5")
@@ -20,8 +20,6 @@ sky = SubResource("Sky_12345")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(1000, 0.4, 1000)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_labyrinth"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -42,12 +40,7 @@ transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -0.00875
 shape = SubResource("BoxShape3D_floor")
 
 [node name="labyrinth2" parent="." instance=ExtResource("2_qn7oe")]
-transform = Transform3D(-3.88229, 0, 14.4889, 0, 68.255, 0, -14.4889, 0, -3.88229, -34.621, -5.7, -136.262)
-
-[node name="StaticBody3D_Labyrinth" type="StaticBody3D" parent="labyrinth2"]
-
-[node name="StaticBody3D_Labyrinth#CollisionShape3D_Labyrinth" type="CollisionShape3D" parent="labyrinth2/StaticBody3D_Labyrinth"]
-shape = SubResource("ConcavePolygonShape3D_labyrinth")
+transform = Transform3D(-227.516, 0, 849.102, 0, 1500, 0, -849.102, 0, -227.516, 155.776, -85.557, 294.798)
 
 [node name="CollisionSetup" type="Node" parent="."]
 script = ExtResource("5_collision_script")
@@ -56,12 +49,10 @@ script = ExtResource("5_collision_script")
 
 [node name="MorningMandolinPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_audio_mandolin")
-volume_db = -10.0
+volume_db = -30.0
 autoplay = true
-bus = &"Master"
 
 [node name="CornFieldAmbientPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_audio_ambient")
-volume_db = -10.0
+volume_db = -30.0
 autoplay = true
-bus = &"Master"
